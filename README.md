@@ -230,3 +230,5 @@ below, this is the step most likely to need a second pass.
 - **Log rotation is basic.** `logging.logback.rollingpolicy.*` caps the app's
   log file at 10MB with 3 rotations — enough for a demo, not a sized-for-
   real-traffic policy.
+#   f i n t r a c e - d e m o  
+ 
