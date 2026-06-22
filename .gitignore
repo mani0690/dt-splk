@@ -1,0 +1,15 @@
+# Splunk Cloud forwarder credentials - contains TLS certs, never commit
+services/splunk-uf-sidecar/splunkclouduf.spl
+
+# Terraform
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/terraform.tfvars
+infra/crash.log
+
+# Maven build output
+services/*/target/
+
+# Misc
+.DS_Store

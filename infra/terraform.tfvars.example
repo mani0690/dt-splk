@@ -1,0 +1,15 @@
+# Copy this file to terraform.tfvars (gitignored) and fill in real values
+# before running the one-time local bootstrap apply. Never commit the real
+# file - it contains your Dynatrace and Splunk tokens.
+
+aws_region   = "us-east-1"
+project_name = "fintrace-demo"
+
+dynatrace_env_id     = "abc12345"
+dynatrace_paas_token = "dt0c01.XXXXXXXXXXXXXXXXXXXXXXXX"
+
+splunk_uf_password = "ChangeMe123!"
+splunk_index       = "fintrace"
+
+github_org  = "your-github-username"
+github_repo = "fintrace-demo"
