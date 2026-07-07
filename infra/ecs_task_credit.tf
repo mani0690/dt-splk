@@ -5,6 +5,7 @@ resource "aws_ecs_task_definition" "credit" {
   cpu                      = "1024"
   memory                   = "2048"
   execution_role_arn       = aws_iam_role.ecs_execution.arn
+  task_role_arn            = aws_iam_role.ecs_task.arn
 
   volume {
     name = "oneagent"
@@ -45,7 +46,11 @@ resource "aws_ecs_task_definition" "credit" {
         { containerPort = 8080, protocol = "tcp" }
       ]
       environment = [
-        { name = "LD_PRELOAD", value = "/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so" }
+        { name = "LD_PRELOAD", value = "/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so" },
+        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_NAMESPACE", value = "fintrace/credit-service" },
+        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_ENABLED", value = "true" },
+        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_STEP", value = "30s" },
+        { name = "AWS_REGION", value = var.aws_region }
       ]
       mountPoints = [
         { sourceVolume = "oneagent", containerPath = "/opt/dynatrace/oneagent" },

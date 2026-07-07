@@ -5,6 +5,7 @@ resource "aws_ecs_task_definition" "transaction" {
   cpu                      = "1024"
   memory                   = "2048"
   execution_role_arn       = aws_iam_role.ecs_execution.arn
+  task_role_arn            = aws_iam_role.ecs_task.arn
 
   volume {
     name = "oneagent"
@@ -47,7 +48,12 @@ resource "aws_ecs_task_definition" "transaction" {
       environment = [
         { name = "LD_PRELOAD", value = "/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so" },
         { name = "DEBIT_SERVICE_URL", value = "http://debit-service.internal.local:8080" },
-        { name = "CREDIT_SERVICE_URL", value = "http://credit-service.internal.local:8080" }
+        { name = "CREDIT_SERVICE_URL", value = "http://credit-service.internal.local:8080" },
+        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_NAMESPACE", value = "fintrace/transaction-service" },
+        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_ENABLED", value = "true" },
+        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_STEP", value = "30s" },
+        { name = "AWS_REGION", value = var.aws_region }
+
       ]
       mountPoints = [
         { sourceVolume = "oneagent", containerPath = "/opt/dynatrace/oneagent" },
