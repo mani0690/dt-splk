@@ -49,9 +49,9 @@ resource "aws_ecs_task_definition" "transaction" {
         { name = "LD_PRELOAD", value = "/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so" },
         { name = "DEBIT_SERVICE_URL", value = "http://debit-service.internal.local:8080" },
         { name = "CREDIT_SERVICE_URL", value = "http://credit-service.internal.local:8080" },
-        { name = "MANAGEMENT_CLOUDWATCH2_METRICS_EXPORT_NAMESPACE", value = "fintrace/transaction-service" },
-        { name = "MANAGEMENT_CLOUDWATCH2_METRICS_EXPORT_ENABLED", value = "true" },
-        { name = "MANAGEMENT_CLOUDWATCH2_METRICS_EXPORT_STEP", value = "30s" },
+        { name = "MANAGEMENT_METRICS_EXPORT_CLOUDWATCH_NAMESPACE", value = "fintrace/transaction-service" },
+        { name = "MANAGEMENT_METRICS_EXPORT_CLOUDWATCH_ENABLED", value = "true" },
+        { name = "MANAGEMENT_METRICS_EXPORT_CLOUDWATCH_STEP", value = "30s" },
         { name = "AWS_REGION", value = var.aws_region }
 
       ]
