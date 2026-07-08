@@ -183,13 +183,16 @@ resource "aws_iam_role_policy" "github_actions_deploy" {
         Effect = "Allow"
         Action = [
           "ec2:DescribeVpcAttribute",
+          "ec2:DescribeSecurityGroupRules",
           "ecr:ListTagsForResource",
           "logs:ListTagsForResource",
           "logs:ListTagsLogGroup",
           "iam:ListRolePolicies",
           "iam:GetRolePolicy",
           "iam:GetOpenIDConnectProvider",
-          "secretsmanager:GetResourcePolicy"
+          "iam:ListAttachedRolePolicies",
+          "secretsmanager:GetResourcePolicy",
+          "servicediscovery:ListTagsForResource"
         ]
         Resource = "*"
       }
