@@ -176,6 +176,22 @@ resource "aws_iam_role_policy" "github_actions_deploy" {
           "dynamodb:DeleteItem"
         ]
         Resource = "*"
+      },
+      {
+        # Additional read permissions required by AWS Terraform provider v5.100+
+        # during state refresh - these weren't needed in earlier provider versions.
+        Effect = "Allow"
+        Action = [
+          "ec2:DescribeVpcAttribute",
+          "ecr:ListTagsForResource",
+          "logs:ListTagsForResource",
+          "logs:ListTagsLogGroup",
+          "iam:ListRolePolicies",
+          "iam:GetRolePolicy",
+          "iam:GetOpenIDConnectProvider",
+          "secretsmanager:GetResourcePolicy"
+        ]
+        Resource = "*"
       }
     ]
   })
