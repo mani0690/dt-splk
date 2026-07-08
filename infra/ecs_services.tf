@@ -6,7 +6,7 @@ resource "aws_ecs_service" "debit" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = data.aws_subnets.default.ids
+    subnets          = local.public_subnet_ids
     security_groups  = [aws_security_group.internal.id]
     assign_public_ip = true # needed for internet egress in default VPC; SG keeps it private from inbound
   }
@@ -24,7 +24,7 @@ resource "aws_ecs_service" "credit" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = data.aws_subnets.default.ids
+    subnets          = local.public_subnet_ids
     security_groups  = [aws_security_group.internal.id]
     assign_public_ip = true
   }
@@ -42,7 +42,7 @@ resource "aws_ecs_service" "transaction" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = data.aws_subnets.default.ids
+    subnets          = local.public_subnet_ids
     security_groups  = [aws_security_group.public_app.id]
     assign_public_ip = true
   }

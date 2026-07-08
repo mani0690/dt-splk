@@ -47,9 +47,9 @@ resource "aws_ecs_task_definition" "credit" {
       ]
       environment = [
         { name = "LD_PRELOAD", value = "/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so" },
-        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_NAMESPACE", value = "fintrace/credit-service" },
-        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_ENABLED", value = "true" },
-        { name = "MANAGEMENT_CLOUDWATCH_METRICS_EXPORT_STEP", value = "30s" },
+        { name = "MANAGEMENT_CLOUDWATCH2_METRICS_EXPORT_NAMESPACE", value = "fintrace/transaction-service" },
+        { name = "MANAGEMENT_CLOUDWATCH2_METRICS_EXPORT_ENABLED", value = "true" },
+        { name = "MANAGEMENT_CLOUDWATCH2_METRICS_EXPORT_STEP", value = "30s" },
         { name = "AWS_REGION", value = var.aws_region }
       ]
       mountPoints = [
